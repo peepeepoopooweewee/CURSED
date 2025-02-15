@@ -53,6 +53,39 @@
             height: auto;
             border: 2px solid #ff0000;
         }
+        
+        .slider-container {
+            margin: 20px 0;
+            color: #ff0000;
+        }
+        
+        .slider {
+            -webkit-appearance: none;
+            width: 80%;
+            height: 10px;
+            background: #333;
+            outline: none;
+            border: 1px solid #ff0000;
+            margin: 10px 0;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #ff0000;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #ff0000;
+            cursor: pointer;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
@@ -64,6 +97,14 @@
                     <option value="glitch">Glitch Mode</option>
                     <option value="jpeg">JPEG Hell</option>
                 </select>
+                <br>
+                <div class="slider-container">
+                    <label for="intensity">CURSED INTENSITY:</label>
+                    <input type="range" id="intensity" name="intensity" 
+                           min="1" max="10" value="5" 
+                           class="slider">
+                    <span id="intensity-value">5</span>
+                </div>
                 <br>
                 <input type="file" name="file" accept="image/*">
                 <br>
@@ -94,6 +135,12 @@
                 result.appendChild(img);
             });
         };
+
+        const slider = document.getElementById("intensity");
+        const output = document.getElementById("intensity-value");
+        slider.oninput = function() {
+            output.innerHTML = this.value;
+        }
     </script>
 </body>
 </html> 
