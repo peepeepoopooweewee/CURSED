@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cursed Image Scrambler</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ff0000;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #2a2a2a;
+            border-radius: 10px;
+        }
+        
+        h1 {
+            text-shadow: 2px 2px 4px #000;
+        }
+        
+        .upload-form {
+            margin: 20px 0;
+        }
+        
+        select, input[type="file"], input[type="submit"] {
+            margin: 10px;
+            padding: 5px;
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #ff0000;
+        }
+        
+        input[type="submit"] {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #ff0000;
+        }
+        
+        #result {
+            margin-top: 20px;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 CURSED IMAGE SCRAMBLER 👻</h1>
+        <div class="upload-form">
+            <form action="/" method="post" enctype="multipart/form-data">
+                <select name="effect">
+                    <option value="glitch">Glitch Mode</option>
+                    <option value="jpeg">JPEG Hell</option>
+                </select>
+                <br>
+                <input type="file" name="file" accept="image/*">
+                <br>
+                <input type="submit" value="CURSE THIS IMAGE">
+            </form>
+        </div>
+        <div id="result">
+            <!-- Processed image will appear here -->
+        </div>
+    </div>
+    
+    <script>
+        document.querySelector('form').onsubmit = function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch('/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(blob);
+                const result = document.getElementById('result');
+                result.innerHTML = '';
+                result.appendChild(img);
+            });
+        };
+    </script>
+</body>
+</html> 
